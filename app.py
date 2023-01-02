@@ -35,17 +35,40 @@ def show_skills():
 
 
 def add_skill():
-    print('add skill is working')
+    """ add new skill """
     skname = str(input('Type the skill name: ').strip().capitalize())
-    prog = int(input('Type the skill progress: ').strip())
     cr.execute(
-        f'insert into skills(user_id,name,progress) values("{uid}","{skname}","{prog}")')
-    print(f'the skill {skname} and progress has been added successully')
-    save_and_close()
+        f'select name from skills where name = "{skname}" and user_id ="{uid}"')
+    result = cr.fetchone()
+    if result == None:
+        print('Nice, you got a new skill :)')
+        prog = int(input('Type the skill progress: ').strip())
+        cr.execute(
+            f'insert into skills(user_id,name,progress) values("{uid}","{skname}","{prog}")')
+        print(f'the skill {skname} and progress has been added successully')
+        save_and_close()
+    else:
+        print(f'Sorry {skname} is already exist :(')
+        change = str(
+            input('the do you like to update it?: "Y" or "N"').strip().lower())
+        if change == "y":
+            prog = int(input('Type the skill progress: ').strip())
+            cr.execute(
+                f'update skills set progress = "{prog}" where name = "{skname}" and  user_id = "{uid}"')
+            print(
+                f'the skill {skname} with the {prog}progress has been updated successully')
+            save_and_close()
+        else:
+            quit
 
 
 def update_skill():
-    print('update skill is working')
+    skname = str(input('Type the skill name: ').strip().capitalize())
+    prog = int(input('Type the skill progress: ').strip())
+    cr.execute(
+        f'update skills set progress = "{prog}" where name = "{skname}" and user_id = "{uid}"')
+    print(f'the skill new {skname}  progress has been added successully')
+    save_and_close()
 
 
 def delete_skill():
