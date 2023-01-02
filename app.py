@@ -56,7 +56,7 @@ def add_skill():
             cr.execute(
                 f'update skills set progress = "{prog}" where name = "{skname}" and  user_id = "{uid}"')
             print(
-                f'the skill {skname} with the {prog}progress has been updated successully')
+                f'the skill {skname} with the {prog}% progress has been updated successully')
             save_and_close()
         else:
             quit
@@ -67,7 +67,7 @@ def update_skill():
     prog = int(input('Type the skill progress: ').strip())
     cr.execute(
         f'update skills set progress = "{prog}" where name = "{skname}" and user_id = "{uid}"')
-    print(f'the skill new {skname}  progress has been added successully')
+    print(f'the skill new {skname}  progress has been updated successully')
     save_and_close()
 
 
@@ -95,12 +95,3 @@ if user_inpt in command_list:
         print('The app has been closed, Thank you')
 else:
     print(f'sorry there is no command with {user_inpt}')
-
-# this is the reop info
-# echo "# py-app" >> README.md
-# git init
-# git add README.md
-# git commit -m "first commit"
-# git branch -M main
-# git remote add origin https://github.com/shgawa13/py-app.git
-# git push -u origin main
